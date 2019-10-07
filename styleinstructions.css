@@ -1,0 +1,29 @@
+
+body{
+	background-color: #182d3b;
+	
+}
+
+p{
+	padding:1.2em 75.8em;
+}
+
+a{
+	background-color:yellow;
+	box-shadow: 0 5px 0 #DF6D16;
+	color:#7D3D0C;
+	padding:0.5em 0.5em;
+	text-transform: uppercase;
+	text-decoration:none;
+	a:hover{
+		background-color:#555;
+	}
+	
+	a:active{
+		background-color:black;
+	}
+
+	a:visited{
+		background-color#ccc;
+	}
+}

@@ -1,0 +1,42 @@
+body{
+	background-image: url("assets/Backgroundp.png");
+	
+	
+}
+
+
+#user{
+	position: absolute;
+  	left: 660px;
+  	top: 160px;
+}
+#controls{
+	position: absolute;
+  	left: 640px;
+  	top: 215px;
+}
+#instructions{
+	position: absolute;
+  	left: 624px;
+  	top: 275px;
+}
+
+a{
+	background-color:yellow;
+	box-shadow: 0 5px 0 #DF6D16;
+	color:#7D3D0C;
+	padding:0.5em 0.5em;
+	text-transform: uppercase;
+	text-decoration:none;
+	a:hover{
+		background-color:#555;
+	}
+	
+	a:active{
+		background-color:black;
+	}
+
+	a:visited{
+		background-color#ccc;
+	}
+}

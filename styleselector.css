@@ -1,0 +1,43 @@
+body{
+	background-color: #182d3b;
+	
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: 2px solid #FFFFFF; 
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 30px 50px;
+  cursor: pointer;
+}
+
+a{
+  background-color:yellow;
+  box-shadow: 0 5px 0 #DF6D16;
+  color:#7D3D0C;
+  padding:0.5em 0.5em;
+  text-transform: uppercase;
+  text-decoration:none;
+  a:hover{
+    background-color:#555;
+  }
+  
+  a:active{
+    background-color:black;
+  }
+
+  a:visited{
+    background-color#ccc;
+  }
+}
+#index{
+  position: absolute;
+    left: 1200px;
+    top: 500px;
+}
+
