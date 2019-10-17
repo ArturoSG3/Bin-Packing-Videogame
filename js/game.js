@@ -401,7 +401,7 @@ function update() {
 
                     if(placed[i][0].getRoadColision() - amountHouses + 1==0){
                         placed[i][0].setColor(0x778899);
-                    }else if(placed[i][0].getRoadColision()>=1){
+                    }else if(placed[i][0].getRoadColision()>=2){
                             placed[i][0].setColor(0x778899);
                     }else{
                         placed[i][0].setColor(0x0000FF);
