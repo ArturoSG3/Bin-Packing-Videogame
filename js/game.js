@@ -396,7 +396,7 @@ function update() {
                 objects.checkRoadColision()
                 
             }
-            for (var i = 0; i<placed.length;i++){
+            for (var i = 0; i<placed.length -1;i++){
                 if(placed[i][0].isRoad()){
 
                     if(placed[i][0].getRoadColision() - amountHouses + 1==0){
@@ -423,7 +423,6 @@ function update() {
             }
             gameObject.initialColor();
             redrawPlacedObjects();
-            score -= gameObject.getScore();
             if(!passed || amountRoads < amountHouses - 1){
                 score = 0;
             }
