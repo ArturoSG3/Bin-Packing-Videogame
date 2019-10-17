@@ -173,7 +173,12 @@ class RayPolygons{
             
             if(this.checkObject.isRoad() && this.objects[i][0].isRoad()){
                 if(ray.colisionPolygon(objectPolygon) || objectRay.colisionPolygon(polygon)){
-                    this.checkObject.addRoadColision();
+                    if(this.objects[i][0].getRoadColision()!=1 && this.checkObject.getRoadColision()==1){
+                        this.objects[i][0].setRoadColision(this.checkObject.getRoadColision());
+                    }else if(this.objects[i][0].getRoadColision()==1 && this.checkObject.getRoadColision()!=1){
+                        this.checkObject.setRoadColision(this.objects[i][0].getRoadColision());
+                    }
+                    
                 }
             }
             if(!this.checkObject.isRoad() && this.objects[i][0].isRoad()){

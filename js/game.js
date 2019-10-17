@@ -384,30 +384,40 @@ function update() {
             score = 0;
             var totalArea = land.getArea();
             var passed = true;
+            var firstRoad = true;
             for (var i = 0; i<placed.length;i++){
                 if(!placed[i][0].isRoad()){
                     amountHouses += 1;
                     placed[i][0].setRoadColision(false);
 
                 }else{
+                    if(firstRoad){
+                        firstRoad = false;
+                        placed[i][0].setRoadColision(1)
+                    }
                     amountRoads +=1;
                 }
                 var objects = new RayPolygons(placed, placed[i][0], i)
                 objects.checkRoadColision()
                 
             }
+            for (var i = 0; i<placed.length;i++){
+                if(placed[i][0].isRoad() && placed[i][0].getRoadColision()!=1){
+                    var objects = new RayPolygons(placed, placed[i][0], i)
+                    objects.checkRoadColision()
+                }
+            }
             for (var i = 0; i<placed.length -1;i++){
                 if(placed[i][0].isRoad()){
 
                     if(placed[i][0].getRoadColision() - amountHouses + 1==0){
                         placed[i][0].setColor(0x778899);
-                    }else if(placed[i][0].getRoadColision()>=2){
+                    }else if(placed[i][0].getRoadColision()>=1){
                             placed[i][0].setColor(0x778899);
                     }else{
                         placed[i][0].setColor(0x0000FF);
                         passed = false;
                     }
-
                     placed[i][0].resetRoadColision();
                 }else{
                     totalArea -= gameObject.getArea()
@@ -425,6 +435,11 @@ function update() {
             redrawPlacedObjects();
             if(!passed || amountRoads < amountHouses - 1){
                 score = 0;
+            }
+            for (var i = 0; i<placed.length -1;i++){
+                if(placed[i][0].isRoad()){
+                    placed[i][0].resetRoadColision();
+                }
             }
             var last = index - 1;
             docRef.update({

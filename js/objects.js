@@ -261,8 +261,8 @@ class Road extends House{
 
 	}
 
-	addRoadColision(){
-		this.roadColision += 1;
+	setRoadColision(num){
+		this.roadColision = num;
 	}
 
 	getRoadColision(){
