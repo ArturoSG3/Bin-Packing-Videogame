@@ -70,7 +70,7 @@ class HouseSelector{
 	house07 = [-25, -50, 25, -50, 50, 1, 25, 50, -25, 50, -50, 1] //Hex
 	house08 = [-25, -50, 25, -50, 50, -25, 50, 25, 1, 50, -50, 25, -50, -25] //Hept
 	house09 = [-25, -50, 25, -50, 50, -25, 50, 25, 25, 50, -25, 50, -50, 25, -50, -25]//Oct
-	priorities = [[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[2,1,3],[1,1,1],[2,3,1],[1,2,2],[1,1,1],[1,1,1],[1,2,2]];
+	priorities = [[1,1,1],[1,1,1],[1,1,1],[1,1,1],[2,1,3],[1,1,1],[2,3,1],[1,2,2],[1,1,1],[1,1,1],[1,2,2],[1,1,1]];
 	currentPriorities = [];
 	houses = [];
 	currentLevel = [];
@@ -78,7 +78,6 @@ class HouseSelector{
 	currentIndex = 0;
 	constructor(level){
 		this.houses = [[this.house04, this.house05, this.house06],
-					   [this.house04, this.house07, this.house06], 
 					   [this.house07, this.house08, this.house09], 
 					   [this.house04, this.house05, this.house06],
 					   [this.house01, this.house02, this.house03],
@@ -88,7 +87,8 @@ class HouseSelector{
 					   [this.house05, this.house04, this.house06],
 					   [this.house04, this.house06, this.house07], 
 					   [this.house04, this.house05, this.house08],
-					   [this.house05, this.house06, this.house09]
+					   [this.house05, this.house06, this.house09],
+					   [this.house04, this.house07, this.house06]
 					  ]
 		this.currentLevel = this.houses[level];
 		this.currentHouse = this.currentLevel[this.currentIndex];
@@ -165,11 +165,11 @@ class LandSelector{
 			  120, 200, 120, 100, 40, 100, 40, 200, -40, 200, -40, 100, -120, 100, -120, 200, -200, 200];
 	land5 = [-200, -200, -50, -100, 200, -100, 200, 100, -50, 100, -200, 200];
 	land6 = [-200, -200, -100, -200, -100, -100, -50, -100, -50,-200, 200, -200, 200, 200, -50, 200, -50, 100, -100, 100, -100, 200, -200, 200];
+	land7 = [-200, -200, -10,-200, -10, -50, -100, -50, -100, 50, 100, 50, 100, -50, 10, -50, 10, -200,  200, -200, 200, 200, -200, 200];
 	lands = []
 	currentLand; 
 	constructor(level){
-		this.lands = [this.land0, 
-					  this.land0, 
+		this.lands = [this.land0,  
 					  this.land0, 
 					  this.land1, 
 					  this.land1, 
@@ -179,7 +179,8 @@ class LandSelector{
 					  this.land3,
 					  this.land4,
 					  this.land5,
-					  this.land6
+					  this.land6,
+					  this.land7
 
 					 ];
 		this.currentLand = new Land(this.lands[level]);

@@ -180,7 +180,6 @@ class RayPolygons{
                 if(!this.checkObject.isRoadColision()){
                     if(ray.colisionPolygon(objectPolygon)|| objectRay.colisionPolygon(polygon)){
                             this.checkObject.setRoadColision(true);
-                            this.objects[i][0].addRoadColision();
                     }
                 }else{
                     return 0;

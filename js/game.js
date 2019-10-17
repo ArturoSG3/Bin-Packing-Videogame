@@ -18,6 +18,7 @@ var pressedF = true;
 var houseOutside = false;
 var overButton = false;
 var placeRoad = false;
+var currentPlaceRoad = false;
 var placeHouse = false;
 var deleted = 0;
 var selectedLevel;
@@ -224,7 +225,11 @@ function update() {
                 docRef.update({
                     "Area": area
                 })
-                gameObject = levelSelector.getHouse();
+                if(currentPlaceRoad){
+                    gameObject = levelSelector.getRoad();
+                } else {
+                    gameObject = levelSelector.getHouse();
+                }
                 graphics = game.add.graphics(0, 0);
                 placed.push([gameObject, graphics])
                 poly = placed[index][0].getPolygon();
@@ -286,6 +291,7 @@ function update() {
 
     if (sKey.isDown){
     	if(pressedS){
+            currentPlaceRoad = false;
     		levelSelector.changeHouse();
     		gameObject = levelSelector.getHouse();
     		graphics = game.add.graphics(0, 0);
@@ -297,7 +303,10 @@ function update() {
 			
     	}
     }
-
+    
+    if(sKey.isUp){
+        pressedS = true;
+    }
     if (placeHouse){
 		gameObject = levelSelector.getHouse();
 		graphics = game.add.graphics(0, 0);
@@ -306,6 +315,7 @@ function update() {
 		redrawPlacedObjects()
 		redrawObject()
 		placeHouse = false;
+        currentPlaceRoad = false;
     }
 
     if (placeRoad){
@@ -316,12 +326,11 @@ function update() {
 		redrawPlacedObjects()
 		redrawObject()
 		placeRoad = false;
+        currentPlaceRoad = true;
     }
 
     
-    if(sKey.isUp){
-    	pressedS = true;
-    }
+    
 
     if (rKey.isDown){
     	if(pressedR){
@@ -343,13 +352,7 @@ function update() {
     		var housePolygon = gameObject.getPolygonPoints()
     		var ray = new RayPolygon(landPolygon)
     		var colision = false
-    		for (var i = 0; i<placed.length;i++){
-            	var houses = new RayPolygons(placed, placed[i][0], i)
-            	if(houses.checkColision()){
-            		colision = true;
-            	}
-            }
-    		if((ray.containsPolygon(housePolygon) && !colision)|| (!gameObject.getPlaced() && !colision)){
+    		if(ray.containsPolygon(housePolygon)|| !gameObject.getPlaced()){
 				index +=1;
 				
     			if(index>placed.length-1){
@@ -398,7 +401,7 @@ function update() {
 
                     if(placed[i][0].getRoadColision() - amountHouses + 1==0){
                         placed[i][0].setColor(0x778899);
-                    }else if(placed[i][0].getRoadColision()>=2){
+                    }else if(placed[i][0].getRoadColision()>=1){
                             placed[i][0].setColor(0x778899);
                     }else{
                         placed[i][0].setColor(0x0000FF);
@@ -418,6 +421,7 @@ function update() {
                     placed[i][0].setRoadColision(false);
                 }
             }
+            gameObject.initialColor();
             redrawPlacedObjects();
             score -= gameObject.getScore();
             if(!passed || amountRoads < amountHouses - 1){
