@@ -226,7 +226,7 @@ function update() {
                     "Area": area
                 })
                 if(currentPlaceRoad){
-                    gameObject = levelSelector.getRoad();
+                    gameObject = levelSelector.getRoad(index + 1);
                 } else {
                     gameObject = levelSelector.getHouse();
                 }
@@ -319,7 +319,7 @@ function update() {
     }
 
     if (placeRoad){
-		gameObject = levelSelector.getRoad();
+		gameObject = levelSelector.getRoad(index);
 		graphics = game.add.graphics(0, 0);
 		placed[index][0] = gameObject;
 		placed[index][1] = graphics;
@@ -393,6 +393,7 @@ function update() {
                 }else{
                     if(firstRoad){
                         firstRoad = false;
+                        var path = new RoadPath(placed[i][0], placed, i)
                         placed[i][0].setRoadColision(1)
                     }
                     amountRoads +=1;
@@ -401,11 +402,8 @@ function update() {
                 objects.checkRoadColision()
                 
             }
-            for (var i = 0; i<placed.length;i++){
-                if(placed[i][0].isRoad() && placed[i][0].getRoadColision()!=1){
-                    var objects = new RayPolygons(placed, placed[i][0], i)
-                    objects.checkRoadColision()
-                }
+            if(!firstRoad){
+                path.startCheckPath()
             }
             for (var i = 0; i<placed.length -1;i++){
                 if(placed[i][0].isRoad()){
@@ -433,6 +431,7 @@ function update() {
             }
             gameObject.initialColor();
             redrawPlacedObjects();
+            redrawObject();
             if(!passed || amountRoads < amountHouses - 1){
                 score = 0;
             }

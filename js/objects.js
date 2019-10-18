@@ -253,14 +253,22 @@ class House extends Land{
 class Road extends House{
 	color = 0x778899;
 	roadColision = 0;
-	constructor(){
+	constructor(index){
 		var coordinates = [-15, -30, 15, -30, 15, 30, -15, 30];
 		var priority = 1
 		super(coordinates, priority);
+		this.roadsInCollision = [];
 		this.initialColor()
 
 	}
 
+	addRoadInCollision(index){
+		this.roadsInCollision.push(index);
+	}
+
+	getRoadsInCollision(){
+		return this.roadsInCollision;
+	}
 	setRoadColision(num){
 		this.roadColision = num;
 	}
@@ -271,6 +279,7 @@ class Road extends House{
 
 	resetRoadColision(){
 		this.roadColision = 0;
+		this.roadsInCollision = [];
 	}
 
 	isRoadColision(){

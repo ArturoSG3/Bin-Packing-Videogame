@@ -173,12 +173,7 @@ class RayPolygons{
             
             if(this.checkObject.isRoad() && this.objects[i][0].isRoad()){
                 if(ray.colisionPolygon(objectPolygon) || objectRay.colisionPolygon(polygon)){
-                    if(this.objects[i][0].getRoadColision()!=1 && this.checkObject.getRoadColision()==1){
-                        this.objects[i][0].setRoadColision(this.checkObject.getRoadColision());
-                    }else if(this.objects[i][0].getRoadColision()==1 && this.checkObject.getRoadColision()!=1){
-                        this.checkObject.setRoadColision(this.objects[i][0].getRoadColision());
-                    }
-                    
+                    this.checkObject.addRoadInCollision(i)
                 }
             }
             if(!this.checkObject.isRoad() && this.objects[i][0].isRoad()){
@@ -191,10 +186,39 @@ class RayPolygons{
                 }
             }
         }
+        if(this.checkObject.isRoad()){
+            console.log(this.checkObject.getRoadsInCollision())
+        }
         return 0;
 
     }
 
+}
+
+class RoadPath{
+    constructor(road, objects, index){
+        /*points: a list of Points in clockwise order.*/
+        this.objects = objects;
+        this.checkedObjects = [index]
+        this.road = road
+    }
+
+    startCheckPath(){
+        this.checkPath(this.road)
+    }
+
+    checkPath(road){
+        road.setRoadColision(1);
+        var roads = road.getRoadsInCollision();
+        for(var i = 0; i<roads.length; i++){
+            if(!this.checkedObjects.includes(roads[i])){
+                this.checkedObjects.push(roads[i])
+                this.checkPath(this.objects[roads[i]][0])
+            }
+        }
+
+
+    }
 }
 
 
