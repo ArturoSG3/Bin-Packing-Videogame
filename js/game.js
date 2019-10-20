@@ -40,7 +40,6 @@ firebase.initializeApp(firebaseConfig);
 var firestore = firebase.firestore();
 
 function preload(){
-	game.load.image('background','assets/background.jpg');
 	game.load.spritesheet('houseButton', 'assets/houseButton.jpg ', 196, 73);
 	game.load.spritesheet('roadButton', 'assets/roadButton.jpg ', 196, 73);
     game.load.image('controls', 'assets/ControlsLevel.png');
@@ -154,8 +153,12 @@ function update() {
         pressedS = false;
         pressedX = false;
     	var tmpCenter = gameObject.getCenter();
+        gameObject.initialColor()
     	gameObject.setCenter([game.input.x, game.input.y])
-    	if(overButton){
+        if(checkInside()){
+            gameObject.setPlaced(true)
+        }
+    	if(overButton || (gameObject.getPlaced() && !checkInside())){
     		gameObject.setCenter(tmpCenter)
     	}
     	redrawObject()
@@ -185,12 +188,20 @@ function update() {
     		for (var i = 0; i<placed.length;i++){
             	var houses = new RayPolygons(placed, placed[i][0], i)
             	if(houses.checkColision()){
+                    placed[i][0].setColor( 0x0000FF)
             		colision = true;
-            	}
+            	}else{
+                    if(!placed[i][0].isRoad()){
+                        placed[i][0].setColor( 0xFF3300);
+                    } else{
+                        placed[i][0].setColor(0x778899);
+                    }
+                }
             	housePolygon = placed[i][0].getPolygonPoints()
             	if(ray.containsPolygon(housePolygon)){
             		houseOutside = false;
             	}else{
+                    gameObject.setColor( 0x0000FF)
             		houseOutside = true;
             	}
             }
@@ -233,11 +244,12 @@ function update() {
                 graphics = game.add.graphics(0, 0);
                 placed.push([gameObject, graphics])
                 poly = placed[index][0].getPolygon();
-                redrawPlacedObjects()
                 index += 1; 
                 docRef = firestore.doc(referenceFB);
                 
 			}
+            redrawPlacedObjects()
+            redrawObject()
 			pressedQ = false;
 			
     	}
@@ -277,6 +289,7 @@ function update() {
     		var tmp = placed[index]
     		gameObject = tmp[0];
     		graphics = tmp[1];
+            gameObject.initialColor();
     		poly = placed[index][0].getPolygon();
     		redrawPlacedObjects()
 			redrawObject()
@@ -429,7 +442,7 @@ function update() {
                     placed[i][0].setRoadColision(false);
                 }
             }
-            gameObject.initialColor();
+            gameObject.setColor(0x0000FF);
             redrawPlacedObjects();
             redrawObject();
             if(!passed || amountRoads < amountHouses - 1){
@@ -485,6 +498,13 @@ function redrawObject(){
     graphics.drawPolygon(poly.points);
     graphics.endFill();
 
+}
+
+function checkInside(){
+    var landPolygon = land.getPolygonPoints()
+    var ray = new RayPolygon(landPolygon)
+    var housePolygon = gameObject.getPolygonPoints()
+    return ray.containsPolygon(housePolygon)
 }
 
 function redrawPlacedObjects(){
