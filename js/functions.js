@@ -186,9 +186,6 @@ class RayPolygons{
                 }
             }
         }
-        if(this.checkObject.isRoad()){
-            console.log(this.checkObject.getRoadsInCollision())
-        }
         return 0;
 
     }

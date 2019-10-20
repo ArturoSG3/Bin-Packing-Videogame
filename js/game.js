@@ -402,8 +402,12 @@ function update() {
                 if(!placed[i][0].isRoad()){
                     amountHouses += 1;
                     placed[i][0].setRoadColision(false);
-
                 }else{
+                    var houses = new RayPolygons(placed, placed[i][0], i)
+                    if(houses.checkColision()){
+                        placed[i][0].setColor( 0x0000FF)
+                        passed = false;
+                    }
                     if(firstRoad){
                         firstRoad = false;
                         var path = new RoadPath(placed[i][0], placed, i)
@@ -442,7 +446,8 @@ function update() {
                     placed[i][0].setRoadColision(false);
                 }
             }
-            gameObject.setColor(0x0000FF);
+            placed[placed.length-1][0].setColor(0x0000FF)
+            gameObject.initialColor();
             redrawPlacedObjects();
             redrawObject();
             if(!passed || amountRoads < amountHouses - 1){
