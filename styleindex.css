@@ -4,22 +4,24 @@ body{
 	
 }
 
+#instructions{
+	position: absolute;
+  	left: 640px;
+  	top: 160px;
+}
 
 #user{
 	position: absolute;
   	left: 660px;
-  	top: 160px;
+  	top: 218px;
 }
+
 #controls{
 	position: absolute;
   	left: 640px;
-  	top: 215px;
-}
-#instructions{
-	position: absolute;
-  	left: 624px;
   	top: 275px;
 }
+
 
 a{
 	background-color:yellow;
