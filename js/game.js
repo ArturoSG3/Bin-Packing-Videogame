@@ -265,6 +265,7 @@ function update() {
             var cent = gameObject.getCenter();
             var angle = gameObject.getAngle();
             var area = gameObject.getArea();
+            var time = placed.length;
             var reflection = gameObject.getReflection();
             var obj = levelSelector.getCurrentObject();
             docRef = firestore.doc(tmpRef);
@@ -283,6 +284,9 @@ function update() {
             })
             docRef.update({
                 "Area": area
+            })
+            docRef.update({
+                "Time": time
             })
             docRef = firestore.doc(referenceFB);
     		placed.splice(index, 1) 

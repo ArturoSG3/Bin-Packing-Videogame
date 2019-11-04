@@ -70,7 +70,7 @@ class HouseSelector{
 	house07 = [-25, -50, 25, -50, 50, 1, 25, 50, -25, 50, -50, 1] //Hex
 	house08 = [-25, -50, 25, -50, 50, -25, 50, 25, 1, 50, -50, 25, -50, -25] //Hept
 	house09 = [-25, -50, 25, -50, 50, -25, 50, 25, 25, 50, -25, 50, -50, 25, -50, -25]//Oct
-	priorities = [[1,1,1],[1,1,1],[1,1,1],[1,1,1],[2,1,3],[1,1,1],[2,3,1],[1,2,2],[1,1,1],[1,1,1],[1,2,2],[1,1,1]];
+	priorities = [[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1],[2,3,1],[1,2,2],[1,1,1],[1,1,1],[1,2,2],[1,1,1]];
 	currentPriorities = [];
 	houses = [];
 	currentLevel = [];
@@ -79,10 +79,10 @@ class HouseSelector{
 	constructor(level){
 		this.houses = [[this.house04, this.house05, this.house06],
 					   [this.house07, this.house08, this.house09], 
-					   [this.house04, this.house05, this.house06],
-					   [this.house01, this.house02, this.house03],
-					   [this.house01, this.house02, this.house03],
-					   [this.house04, this.house07, this.house05],
+					   [this.house05, this.house06, this.house07],
+					   [this.house05, this.house06, this.house08],
+					   [this.house04, this.house05, this.house08],
+					   [this.house04, this.house05, this.house07],
 					   [this.house04, this.house07, this.house05],
 					   [this.house05, this.house04, this.house06],
 					   [this.house04, this.house06, this.house07], 
@@ -170,16 +170,10 @@ class LandSelector{
 	currentLand; 
 	constructor(level){
 		this.lands = [this.land0,  
-					  this.land0, 
-					  this.land1, 
-					  this.land1, 
-					  this.land1, 
-					  this.land2,
 					  this.land2, 
-					  this.land3,
-					  this.land4,
-					  this.land5,
+					  this.land1, 
 					  this.land6,
+					  this.land5,
 					  this.land7
 
 					 ];
