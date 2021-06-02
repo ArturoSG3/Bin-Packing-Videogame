@@ -1,6 +1,6 @@
 # Houssle
 
--> To run the videogame clone the repository and run the index file. 
+-> To run the video game clone the repository and run the index.html file. 
 
 -> The code related to the operations needed to validate a match are inside js folder. 
 
