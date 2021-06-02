@@ -61,7 +61,7 @@ function create() {
 	finished = false;
     score = 0;
 	placed = [];
-    game.stage.backgroundColor = '#FFFFFF';
+    game.stage.backgroundColor = '#182d3b';
     houseButton = game.add.button(520, 500, 'houseButton', clickHouse, this, 1, 0, 0);
     houseButton.events.onInputOver.add(over, this);
     houseButton.events.onInputOut.add(out, this);
